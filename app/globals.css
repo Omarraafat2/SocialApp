@@ -1,30 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  position: relative; /* Required for the overlay positioning */
+  background: linear-gradient(135deg, #3c4957, #253c53), 
+              url('../app/_image/istockphoto-1403848173-170667a.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; /* Creates a parallax effect */
+  background-blend-mode: overlay; /* Blends the gradient and the image */
+  background-position: center center; /* Centers the background image */
+  min-height: 100vh; /* Ensures the body takes up at least the full height of the viewport */
+  margin: 0; /* Resets any default margin on the body */
+  color: black; /* Light text color for readability on dark background */
 }
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Dark overlay with 60% opacity */
+  z-index: -1; /* Places the overlay behind the content */
+}
+
+
+
+
+
+
 
 @layer utilities {
   .text-balance {
