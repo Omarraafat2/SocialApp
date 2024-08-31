@@ -9,6 +9,7 @@ export interface User {
     _id: string;
     content: string;
     commentCreator: User;
+    createdAt?: string;
   }
   
   export interface Post {
@@ -24,7 +25,7 @@ export interface User {
     id: number;
     content: string;
     timestamp: string;
-  }
+}
   export interface UserPostsQueryArgs {
   id: string;
   limit?: number;
