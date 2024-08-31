@@ -25,3 +25,7 @@ export interface User {
     content: string;
     timestamp: string;
   }
+  export interface UserPostsQueryArgs {
+  id: string;
+  limit?: number;
+}
