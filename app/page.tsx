@@ -3,17 +3,17 @@ import Image from "next/image";
 import img from "../public/image.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter,usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Signup from "./signup/page";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Signin from "./signin/page";
 import { useEffect } from "react";
 
-
 export default function Home() {
   const router = useRouter();
-  const  pathname  = usePathname();
+  const pathname = usePathname();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -44,36 +44,34 @@ export default function Home() {
       }
     },
   });
+
   useEffect(() => {
-    const token = Cookies.get('token');
+    const token = Cookies.get("token");
     if (token) {
-      router.push('/posts');
+      router.push("/posts");
     }
   }, [router]);
-  
 
   return (
     <>
-      <div className=" flex flex-row justify-center align-middle items-center h-screen ">
-        {/*  Form sgn in   */}
-
-        <div className="w-1/2  ">
-        {pathname === '/signup' ? <Signup /> : <Signin />}
-        </div>
-
-        {/*  Image   */}
-        <div className="w-1/2 h-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white p-6 rounded-l-lg shadow-lg">
-          <div className="pb-8">
-            <h1 className="text-3xl font-bold text-center mb-4">
-              Join the conversation!
-            </h1>
-            <p className="text-lg text-center">
+      <div className="flex flex-col md:flex-row h-screen justify-center items-center">
+        {/* Image Section */}
+        <div className="order-1 md:order-2 md:w-1/2 w-full h-1/2 md:h-full flex items-center justify-center bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white p-6 md:rounded-l-lg shadow-lg">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold mb-4">Join the conversation!</h1>
+            <p className="text-lg">
               Sign in to connect, share, and exchange ideas with a community
               that inspires.
             </p>
+            <div className="mt-4">
+              <Image src={img} alt="description" width={300} height={300} />
+            </div>
           </div>
+        </div>
 
-          <Image src={img} alt="description" width={700} height={700} />
+        {/* Form Section */}
+        <div className="order-2 md:order-1 md:w-1/2 w-full p-4 flex justify-center">
+          {pathname === "/signup" ? <Signup /> : <Signin />}
         </div>
       </div>
     </>
