@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
+import {UserPostsQueryArgs} from '../_interfaces/_interfaces';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -58,16 +59,16 @@ export const apiSlice = createApi({
     }),
     allposts: builder.query<any, void>({
       query: () => ({
-        url: 'posts?page=15&limit=50',
+        url: 'posts?page=18&limit=50',
         method: 'GET',
       }),
       providesTags: ['Posts'], // Providing tag for posts
     }),
-    userposts: builder.query<any, void>({
-      query: () => ({
-        url: `users/66be0a48006c4ff191aedeb2/posts`,
+    userposts: builder.query<any, UserPostsQueryArgs>({
+      query: ({ id, limit = 6 }) => ({
+        url: `users/${id}/posts`,
         method: 'GET',
-        params: { limit: 6 },
+        params: { limit },
       }),
       providesTags: ['Posts'], // Providing tag for user posts
     }),
